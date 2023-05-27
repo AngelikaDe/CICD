@@ -1,0 +1,42 @@
+stages:
+  - build
+  - test
+
+cat:
+  stage: build
+  script:
+    - make -C src/cat/
+  artifacts:
+    paths:
+      - src/cat/
+    expire_in: 30 days
+  only:
+    - develop
+
+
+grep:
+  stage: build
+  script:
+    - make -C src/grep/
+  artifacts:
+    paths:
+      - src/cat/
+    expire_in: 30 days
+  only:
+    - develop
+
+style-check:
+  stage: test
+  script:
+    - make -C src/cat/ style CFLAGS=-v 2>&1 | grep -i -A1 warning && exit 1
+    - make -C src/grep/ style CFLAGS=-v 2>&1 | grep -i -A1 warning && exit 1
+  only:
+    - develop
+
+integrational_tests:
+  stage: test
+  script:
+      - make -C src/cat/ test CFLAGS=-v 2>&1 | grep -i -A1 FAIL && exit 1
+      - make -C src/grep/ test CFLAGS=-v 2>&1 | grep -i -A1 FAIL && exit 1
+  only:
+      - develop

@@ -1,0 +1,39 @@
+
+ is 1 1		
+ is 2 2		
+ is 3 3		
+ is 4 4		
+  
+
+  
+	 is 9 9		
+
+ is 10 a		
+ is 11 b		
+ is 12 c		
+
+ is 13 d		
+ is 14 e		 is 0 0    \00 is 0 0
+ is 15 f		
+ is 16 10		
+ is 17 11		
+ is 18 12		
+ is 19 13		
+
+
+
+
+
+g is 103 67		
+h is 104 68		
+i is 105 69		
+j is 106 6a		
+k is 107 6b		
+
+
+
+
+
+} is 125 7d		
+~ is 126 7e		
+ is 127 7f

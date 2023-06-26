@@ -22,7 +22,7 @@ leaks:
 	sh test_cat_leak.sh
 
 style: 
-	clang-format -n s21_cat.c s21_cat_utils.c s21_cat.h
+	clang-format -style=google -n s21_cat.c s21_cat_utils.c s21_cat.h
 
 clean:
 	rm -rf *.a *.out *.o *.dSYM

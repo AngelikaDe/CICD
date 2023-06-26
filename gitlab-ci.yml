@@ -1,0 +1,76 @@
+image: ubuntu:latest
+
+stages:
+  - build
+  - test
+  - deploy
+
+
+cat:
+  stage: build
+  script:
+    - make -C src/cat/
+  tags:
+    - CICD
+  artifacts:
+    paths:
+      - src/cat
+    expire_in: 30 days
+  only:
+    - develop
+
+
+grep:
+  stage: build
+  script:
+    - make -C src/grep/
+  tags:
+    - CICD
+  artifacts:
+    paths:
+      - src/grep
+    expire_in: 30 days
+  only:
+    - develop
+
+
+style-check_cat:
+  stage: test
+  script:
+    - cd src/cat/
+    - bash style.sh
+  tags:
+    - CICD
+  only:
+    - develop
+  allow_failure: false
+
+
+style-check_grep:
+  stage: test
+  script:
+    - cd src/grep/
+    - bash style.sh
+  tags:
+    - CICD
+  only:
+    - develop
+  after_script:
+    - cd src/
+    - bash message.sh
+  allow_failure: false
+
+
+deploy:
+  stage: deploy
+  script:
+    - cd src/
+    - sh copy.sh
+  tags:
+    - CICD
+  only:
+    - develop
+  when: manual
+  after_script:
+    - cd src/
+    - bash message.sh
